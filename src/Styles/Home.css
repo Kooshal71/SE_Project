@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.links {
+  display: block;
+  margin: 50px;
+  background-color: transparent;
+}
+
+button {
+  background-color: coral;
+}

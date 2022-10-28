@@ -1,0 +1,33 @@
+* {
+  /* background-image: url(./images/johny-vino-9f7s4aLatpw-unsplash.jpg); */
+  background-color: black;
+}
+.main-section {
+  /* height: 95vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 40px;
+}
+h1 {
+  text-align: center;
+  color: wheat;
+  margin-top: 60px;
+}
+
+button {
+  background-color: blue;
+  height: 150px;
+  width: 250px;
+  font-size: 25px;
+  border-radius: 10%;
+  color: black;
+  margin: 0 200px;
+}
