@@ -1,23 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../Styles/User.css";
-
+import "../../Styles/User.css";
+import Button from "../../Components/Button";
 function User() {
   return (
     <>
       <h1>User Page</h1>
       <div className="main-section d-flex justify-content-center flex-column">
         <div className="section ">
-          <button type="button">Withdraw</button>
-          <button type="button">Deposit</button>
+          <Button path="/user/withdraw" title="Withdraw" />
+          <Button path="/user/deposit" title="Deposit" />
         </div>
         <div className="section ">
-          <button type="button">Set Pin</button>
-          <button type="button">Transfer</button>
+          <Button path="/user/transfer" title="Transfer" />
+          <Button path="/user/balance" title="Balance" />
         </div>
         <div className="section">
-          <button type="button">Change PIN</button>
-          <button type="button">Check Balance</button>
+          <Button path="/user/changePIN" title="Change Pin" />
+          <Button path="/user/setPin" title="Set PIN" />
         </div>
       </div>
       <Link to="/">Back to home</Link>

@@ -13,3 +13,12 @@
 button {
   background-color: coral;
 }
+
+a {
+  text-decoration: none;
+  color: wheat;
+}
+
+a:hover {
+  color: rgb(119, 201, 119);
+}
