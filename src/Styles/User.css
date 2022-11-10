@@ -1,7 +1,7 @@
 * {
-  /* background-image: url(./images/johny-vino-9f7s4aLatpw-unsplash.jpg); */
-  background-color: black;
+  /* background-color: black; */
 }
+
 .main-section {
   /* height: 95vh; */
   display: flex;
@@ -28,6 +28,14 @@ button {
   width: 250px;
   font-size: 25px;
   border-radius: 10%;
-  color: black;
   margin: 0 200px;
+}
+
+button:hover {
+  color: rgb(119, 201, 119);
+}
+
+a {
+  background-color: transparent;
+  color: wheat;
 }
