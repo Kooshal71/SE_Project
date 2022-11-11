@@ -8,26 +8,42 @@ const Enter = {
 const Delete = {
   main: "red",
 };
+
+const DivStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const SectionStyled = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 40px;
+`;
+
 export default function Keypad() {
   return (
     <>
-      <div className="main-section">
-        <div className="section">
+      <DivStyled className="main-section">
+        <SectionStyled className="section">
           <Button title="1" path="" />
           <Button title="2" path="" />
           <Button title="3" path="" />
-        </div>
-        <div className="section">
+        </SectionStyled>
+        <SectionStyled className="section">
           <Button title="4" path="" />
           <Button title="5" path="" />
           <Button title="6" path="" />
-        </div>
-        <div className="section">
+        </SectionStyled>
+        <SectionStyled className="section">
           <Button title="7" path="" />
           <Button title="8" path="" />
           <Button title="9" path="" />
-        </div>
-        <div className="section">
+        </SectionStyled>
+        <SectionStyled className="section">
           <ThemeProvider theme={Delete}>
             <Button title="Delete" path="" />
           </ThemeProvider>
@@ -35,8 +51,26 @@ export default function Keypad() {
           <ThemeProvider theme={Enter}>
             <Button title="Enter" path="" />
           </ThemeProvider>
-        </div>
-      </div>
+        </SectionStyled>
+      </DivStyled>
     </>
   );
 }
+
+/*
+
+.main-section {
+   height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: 40px;
+}
+*/

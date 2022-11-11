@@ -1,27 +1,26 @@
 import React from "react";
 import { useState } from "react";
+import styled from "styled-components";
 import Keypad from "./Keypad";
-const styles = {
-  body: {
-    backgroundColor: "000",
-  },
-};
-
+const StyledInput = styled.input`
+  -webkit-text-security: disc;
+  text-security: disc;
+`;
+const StyledForm = styled.form`
+  text-align: center;
+`;
 export default function Form() {
-  const [Pin, setPin] = useState("");
+  const [Pin, setPin] = useState(123);
   function handleSubmit() {
     console.log("You have submitted the form");
   }
-  function handleClick() {
-    console.log("Hello");
-  }
   return (
-    <div style={styles.body}>
+    <div>
       <h1>Form</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="password" onChange={handleClick} />
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledInput type="password" />
         <Keypad />
-      </form>
+      </StyledForm>
     </div>
   );
 }
