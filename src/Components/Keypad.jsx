@@ -1,7 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import Button from "./Button";
 
+const Enter = {
+  main: "green",
+};
+const Delete = {
+  main: "red",
+};
 export default function Keypad() {
   return (
     <>
@@ -22,9 +28,13 @@ export default function Keypad() {
           <Button title="9" path="" />
         </div>
         <div className="section">
-          <Button title="Delete" path="" />
+          <ThemeProvider theme={Delete}>
+            <Button title="Delete" path="" />
+          </ThemeProvider>
           <Button title="0" path="" />
-          <Button title="Enter" path="" />
+          <ThemeProvider theme={Enter}>
+            <Button title="Enter" path="" />
+          </ThemeProvider>
         </div>
       </div>
     </>

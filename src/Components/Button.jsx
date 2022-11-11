@@ -4,9 +4,15 @@ import styled from "styled-components";
 const ButtonStyled = styled.button`
   padding: 2em;
   color: black;
-  background-color: red;
+  background-color: ${(props) => props.theme.main};
   width: 120px;
+  margin: 10px;
 `;
+ButtonStyled.defaultProps = {
+  theme: {
+    main: "blue",
+  },
+};
 export default function Button(props) {
   return (
     <div>
