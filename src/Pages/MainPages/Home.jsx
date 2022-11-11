@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../Styles/Home.css";
 import styled from "styled-components";
+import Button from "../../Components/Button";
 
 const DivStyled = styled.div`
   display: flex;
@@ -23,12 +24,8 @@ export default function Home() {
     <DivStyled>
       <h1>Welcome Page</h1>
       <SectionStyled className="main">
-        <button type="button">
-          <Link to="/user">User Page</Link>
-        </button>
-        <button type="button">
-          <Link to="/operator">Operator Page</Link>
-        </button>
+        <Button title="User Page" path="/user" />
+        <Button title="Operator Page" path="/operator" />
       </SectionStyled>
     </DivStyled>
   );
