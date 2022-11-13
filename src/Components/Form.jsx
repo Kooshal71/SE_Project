@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Keypad from "./Keypad";
+
 const StyledInput = styled.input`
   -webkit-text-security: disc;
   text-security: disc;
@@ -10,6 +12,7 @@ const StyledForm = styled.form`
   text-align: center;
 `;
 export default function Form(props) {
+  let navigate = useNavigate();
   let checkActive = "";
   const [Pin, setPin] = useState("");
   const [cNum, setcNum] = useState("");
@@ -27,9 +30,10 @@ export default function Form(props) {
       },
       body: JSON.stringify({ Pin, cNum, amount }),
     });
-    const json = await response.json();
-    console.log(json);
+    const res = await response.body;
+    console.log(res);
     console.log("You have submitted the form");
+    navigate("/user");
   };
   const handleClick = (e) => {
     const num = e.target.value;
