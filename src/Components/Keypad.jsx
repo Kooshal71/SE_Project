@@ -24,32 +24,32 @@ const SectionStyled = styled.section`
   margin: 40px;
 `;
 
-export default function Keypad() {
+export default function Keypad(props) {
   return (
     <>
       <DivStyled className="main-section">
         <SectionStyled className="section">
-          <Button title="1" path="" />
-          <Button title="2" path="" />
-          <Button title="3" path="" />
+          <Button title="1" path="" handleClick={props.handleClick} />
+          <Button title="2" path="" handleClick={props.handleClick} />
+          <Button title="3" path="" handleClick={props.handleClick} />
         </SectionStyled>
         <SectionStyled className="section">
-          <Button title="4" path="" />
-          <Button title="5" path="" />
-          <Button title="6" path="" />
+          <Button title="4" path="" handleClick={props.handleClick} />
+          <Button title="5" path="" handleClick={props.handleClick} />
+          <Button title="6" path="" handleClick={props.handleClick} />
         </SectionStyled>
         <SectionStyled className="section">
-          <Button title="7" path="" />
-          <Button title="8" path="" />
-          <Button title="9" path="" />
+          <Button title="7" path="" handleClick={props.handleClick} />
+          <Button title="8" path="" handleClick={props.handleClick} />
+          <Button title="9" path="" handleClick={props.handleClick} />
         </SectionStyled>
         <SectionStyled className="section">
           <ThemeProvider theme={Delete}>
-            <Button title="Delete" path="" />
+            <Button title="Delete" path="" handleClick={props.handleClick} />
           </ThemeProvider>
-          <Button title="0" path="" />
+          <Button title="0" path="" handleClick={props.handleClick} />
           <ThemeProvider theme={Enter}>
-            <Button title="Enter" path="" />
+            <Button title="Enter" path="" handleClick={props.handleClick} />
           </ThemeProvider>
         </SectionStyled>
       </DivStyled>

@@ -5,7 +5,7 @@ export default function Withdraw() {
   return (
     <div className="withdrawForm">
       <h1>Withdraw Page</h1>
-      <Form />
+      <Form page={"Withdraw"} />
     </div>
   );
 }

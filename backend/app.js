@@ -14,10 +14,11 @@ const pool = mysql.createPool({
   host: "127.0.0.1",
   user: "root",
   password: "",
-  database: "SE_test",
+  database: "SE_Project",
 });
 
 //Get all beers
+/*
 app.get("/beers", (req, res) => {
   pool.getConnection((error, connection) => {
     if (error) throw error;
@@ -105,6 +106,9 @@ app.put("/beers", (req, res) => {
     console.log(req.body);
   });
 });
+*/
+
+app.get("/withdraw", (req, res) => {});
 app.listen(port, () => console.log("listening on port 5000"));
 
 app.get("/", (req, res) => {
