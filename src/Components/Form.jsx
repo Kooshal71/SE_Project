@@ -16,12 +16,12 @@ export default function Form(props) {
   const [amount, setAmount] = useState("");
 
   //! Function to send the data to the backend
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const host = "http:/localhost:5000";
+    const host = "http://localhost:5000";
 
     const response = await fetch(`${host}/withdraw`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -30,7 +30,7 @@ export default function Form(props) {
     const json = await response.json();
     console.log(json);
     console.log("You have submitted the form");
-  }
+  };
   const handleClick = (e) => {
     const num = e.target.value;
     console.log(checkActive);
@@ -58,7 +58,7 @@ export default function Form(props) {
         if (num === "Delete") setcNum((cNum) => cNum.slice(0, -1));
         else if (num === "Enter") handleSubmit();
       }
-      console.log(cNum);
+      console.log(`Card Number is ${cNum}`);
     }
     if (checkActive === "amount") {
       if (amount.length < 6) {
@@ -113,6 +113,8 @@ export default function Form(props) {
           onFocus={checkFocus}
         />
         <Keypad handleClick={handleClick} />
+        <br />
+        <button type="submit">Submit</button>
       </StyledForm>
     </div>
   );

@@ -18,9 +18,9 @@ export default function Button(props) {
     <div>
       <Link to={props.path}>
         <ButtonStyled
-          type="button"
           onClick={props.handleClick}
           value={props.title}
+          type={props.type}
         >
           {props.title}
         </ButtonStyled>

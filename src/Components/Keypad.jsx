@@ -49,7 +49,12 @@ export default function Keypad(props) {
           </ThemeProvider>
           <Button title="0" path="" handleClick={props.handleClick} />
           <ThemeProvider theme={Enter}>
-            <Button title="Enter" path="" handleClick={props.handleClick} />
+            <Button
+              title="Enter"
+              path=""
+              handleClick={props.handleClick}
+              type="submit"
+            />
           </ThemeProvider>
         </SectionStyled>
       </DivStyled>
