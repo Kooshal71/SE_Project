@@ -10,7 +10,7 @@ const ButtonStyled = styled.button`
 `;
 ButtonStyled.defaultProps = {
   theme: {
-    main: "blue",
+    main: "#FFF000",
   },
 };
 export default function Button(props) {

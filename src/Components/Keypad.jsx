@@ -2,9 +2,6 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import Button from "./Button";
 
-const Enter = {
-  main: "green",
-};
 const Delete = {
   main: "red",
 };
@@ -48,14 +45,6 @@ export default function Keypad(props) {
             <Button title="Delete" path="" handleClick={props.handleClick} />
           </ThemeProvider>
           <Button title="0" path="" handleClick={props.handleClick} />
-          <ThemeProvider theme={Enter}>
-            <Button
-              title="Enter"
-              path=""
-              handleClick={props.handleClick}
-              type="submit"
-            />
-          </ThemeProvider>
         </SectionStyled>
       </DivStyled>
     </>

@@ -87,7 +87,6 @@ export default function Form(props) {
   };
   return (
     <div>
-      <h1>Form</h1>
       {console.log(Pin)}
       <StyledForm onSubmit={handleSubmit}>
         <label htmlFor="Pnumber">PIN Number</label>
@@ -97,6 +96,7 @@ export default function Form(props) {
           id="PNumber"
           name="PNumber"
           onFocus={checkFocus}
+          readOnly={true}
         />
         <br />
         <label htmlFor="CNumber">Card Number</label>
@@ -106,6 +106,7 @@ export default function Form(props) {
           id="CNumber"
           name="CNumber"
           onFocus={checkFocus}
+          readOnly={true}
         />
         <br />
         <label htmlFor="Amount">Amount</label>
@@ -115,9 +116,9 @@ export default function Form(props) {
           id="amount"
           name="amount"
           onFocus={checkFocus}
+          readOnly={true}
         />
         <Keypad handleClick={handleClick} />
-        <br />
         <button type="submit">Submit</button>
       </StyledForm>
     </div>
