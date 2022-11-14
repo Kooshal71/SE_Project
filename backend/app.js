@@ -229,6 +229,28 @@ app.put("/changePIN", async function (req, res) {
   });
 });
 
+//! Function to set PIN of a new account
+app.put("/setPIN", async function (req, res) {
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log(`Connected to Database with id ${connection.threadId}`);
+    let { cNum, newPIN, confirmPIN } = req.body;
+    console.log(confirmPIN);
+    console.log(cNum);
+    connection.query(
+      "UPDATE card SET pin = ? WHERE card_no = ?",
+      [newPIN, cNum],
+      (err, rows) => {
+        connection.release();
+        if (err) throw err;
+        console.log(`PIN Has changed to ${newPIN}`);
+      }
+    );
+    res.send("Completed");
+    console.log(req.body);
+  });
+});
+
 //! Function to fetch all the balances of all the accounts(TESTING)
 app.get("/fetch", (req, res) => {
   pool.getConnection((error, connection) => {

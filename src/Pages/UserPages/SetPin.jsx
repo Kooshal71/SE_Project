@@ -15,7 +15,7 @@ const StyledForm = styled.form`
 export default function SetPIN() {
   let navigate = useNavigate();
   let checkActive = "";
-  const [oldPIN, setoldPin] = useState("");
+  const [cNum, setcNum] = useState("");
   const [newPIN, setnewPIN] = useState("");
   const [confirmPIN, setconfirmPIN] = useState("");
 
@@ -28,7 +28,7 @@ export default function SetPIN() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ oldPIN, newPIN, confirmPIN }),
+        body: JSON.stringify({ cNum, newPIN, confirmPIN }),
       });
       const res = response.body;
       console.log(res);
@@ -40,18 +40,18 @@ export default function SetPIN() {
   const handleClick = (e) => {
     const num = e.target.value;
     console.log(checkActive);
-    if (checkActive === "oldPIN") {
-      if (oldPIN.length < 4) {
+    if (checkActive === "cNum") {
+      if (cNum.length < 16) {
         console.log(e.target.value);
-        if (num === "Delete") setoldPin((Pin) => Pin.slice(0, -1));
+        if (num === "Delete") setcNum((Pin) => Pin.slice(0, -1));
         else if (num === "Enter") handleSubmit();
-        else if (0 <= num <= 9) setoldPin((Pin) => Pin + num);
+        else if (0 <= num <= 9) setcNum((Pin) => Pin + num);
         else console.log("WTF is happening");
       } else {
-        if (num === "Delete") setoldPin((Pin) => Pin.slice(0, -1));
+        if (num === "Delete") setcNum((Pin) => Pin.slice(0, -1));
         else if (num === "Enter") handleSubmit();
       }
-      console.log(oldPIN);
+      console.log(`Card Number is ${cNum}`);
     }
     if (checkActive === "newPIN") {
       if (newPIN.length < 4) {
@@ -64,7 +64,7 @@ export default function SetPIN() {
         if (num === "Delete") setnewPIN((Pin) => Pin.slice(0, -1));
         else if (num === "Enter") handleSubmit();
       }
-      console.log(`Card Number is ${newPIN}`);
+      console.log(`New Number is ${newPIN}`);
     }
     if (checkActive === "confirmPIN") {
       if (confirmPIN.length < 4) {
@@ -77,14 +77,14 @@ export default function SetPIN() {
         if (num === "Delete") setconfirmPIN((Pin) => Pin.slice(0, -1));
         else if (num === "Enter") handleSubmit();
       }
-      console.log(confirmPIN);
+      console.log(`confirm Number is ${confirmPIN}`);
     }
   };
 
   const checkFocus = (e) => {
     console.log(e.target.name);
     const checker = e.target.name;
-    if (checker === "OPIN") checkActive = "oldPIN";
+    if (checker === "cNum") checkActive = "cNum";
     else if (checker === "NPIN") checkActive = "newPIN";
     else if (checker === "CPIN") checkActive = "confirmPIN";
   };
@@ -93,14 +93,14 @@ export default function SetPIN() {
     <div className="withdrawForm">
       <h1>Change PIN Page</h1>
       <div>
-        {console.log(oldPIN)}
+        {console.log(cNum)}
         <StyledForm onSubmit={handleSubmit}>
-          <label htmlFor="OPIN">Old PIN Number</label>
+          <label htmlFor="cNum">Card Number</label>
           <StyledInput
             type="password"
-            value={oldPIN}
-            id="OPIN"
-            name="OPIN"
+            value={cNum}
+            id="cNum"
+            name="cNum"
             onFocus={checkFocus}
             readOnly={true}
           />
