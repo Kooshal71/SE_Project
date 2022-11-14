@@ -30,7 +30,7 @@ export default function ChangePin() {
         },
         body: JSON.stringify({ oldPIN, newPIN, confirmPIN }),
       });
-      const res = response.body;
+      const res = await response.text();
       console.log(res);
       console.log("You have submitted the form");
       navigate("/user");
