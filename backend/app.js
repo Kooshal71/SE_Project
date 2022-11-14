@@ -114,6 +114,7 @@ app.put("/withdraw", async function (req, res) {
     if (err) throw err;
     console.log(`Connected to Database with id ${connection.threadId}`);
     const { pin, cNum, amount } = req.body;
+    console.log(pin);
     let client_id = "";
     let finalBalance = 0;
     connection.query(
