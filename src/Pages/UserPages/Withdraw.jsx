@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-import "../../Styles/UserPages/Withdraw.css";
 
 const StyledInput = styled.input`
   -webkit-text-security: disc;

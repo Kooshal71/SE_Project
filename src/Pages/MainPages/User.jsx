@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../Styles/User.css";
 import Button from "../../Components/Button";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
 const DivStyled = styled.div`
   display: flex;
@@ -19,6 +19,10 @@ const SectionStyled = styled.section`
   margin: 20px 60px 20px 60px;
 `;
 
+const Disabled = {
+  main: "grey",
+};
+
 function User() {
   return (
     <>
@@ -29,7 +33,9 @@ function User() {
           <Button path="/user/deposit" title="Deposit" />
         </SectionStyled>
         <SectionStyled className="section ">
-          <Button path="/user/transfer" title="Transfer" />
+          <ThemeProvider theme={Disabled}>
+            <Button path="/user/transfer" title="Transfer" disabled={true} />
+          </ThemeProvider>
           <Button path="/user/balance" title="Balance" />
         </SectionStyled>
         <SectionStyled className="section">
