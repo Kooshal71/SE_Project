@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-
+import { Link } from "react-router-dom";
 const StyledInput = styled.input`
   -webkit-text-security: disc;
   text-security: disc;
@@ -13,12 +12,11 @@ const StyledForm = styled.form`
 `;
 
 export default function Deposit() {
-  let navigate = useNavigate();
   let checkActive = "";
   const [Pin, setPin] = useState("");
   const [cNum, setcNum] = useState("");
   const [amount, setAmount] = useState("");
-
+  const [finalBalance, setfinal] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const host = "http://localhost:5000";
@@ -30,10 +28,11 @@ export default function Deposit() {
       },
       body: JSON.stringify({ Pin, cNum, amount }),
     });
-    const res = await response.body;
+    const res = await response.json();
     console.log(res);
+    // balance = res.balance;
+    setfinal((balance) => (balance = res.finalBalance));
     console.log("You have submitted the form");
-    navigate("/user");
   };
 
   const handleClick = (e) => {
@@ -127,6 +126,9 @@ export default function Deposit() {
           <button type="submit">Submit</button>
         </StyledForm>
       </div>
+      {/* <h1>{`Current Balance : ${balance}`}</h1> */}
+      <h1>{`Final Balance : ${finalBalance}`}</h1>
+      <Link to="/user">Menu</Link>
     </div>
   );
 }

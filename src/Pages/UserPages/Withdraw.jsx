@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
 
@@ -13,12 +13,11 @@ const StyledForm = styled.form`
 `;
 
 export default function Withdraw() {
-  let navigate = useNavigate();
   let checkActive = "";
   const [Pin, setPin] = useState("");
   const [cNum, setcNum] = useState("");
   const [amount, setAmount] = useState("");
-
+  const [finalBalance, setbalance] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const host = "http://localhost:5000";
@@ -30,10 +29,10 @@ export default function Withdraw() {
       },
       body: JSON.stringify({ Pin, cNum, amount }),
     });
-    const res = await response.body;
+    const res = await response.json();
+    setbalance((balance) => (balance = res.finalBalance));
     console.log(res);
     console.log("You have submitted the form");
-    navigate("/user");
   };
 
   const handleClick = (e) => {
@@ -127,6 +126,8 @@ export default function Withdraw() {
           <button type="submit">Submit</button>
         </StyledForm>
       </div>
+      <h1>{`Final Balance : ${finalBalance}`}</h1>
+      <Link to="/user">Menu</Link>
     </div>
   );
 }

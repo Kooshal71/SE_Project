@@ -53,6 +53,7 @@ app.put("/withdraw", async function (req, res) {
               (err, rows) => {
                 connection.release();
                 if (err) throw err;
+                res.status(200).json({ finalBalance: finalBalance });
                 console.log(
                   `Client with ${client_id} has a final balance of ${finalBalance}`
                 );
@@ -62,7 +63,6 @@ app.put("/withdraw", async function (req, res) {
         );
       }
     );
-    res.send("Completed");
     console.log(req.body);
   });
 });
@@ -103,6 +103,7 @@ app.put("/deposit", async function (req, res) {
               (err, rows) => {
                 connection.release();
                 if (err) throw err;
+                res.status(200).json({ finalBalance: finalBalance });
                 console.log(
                   `Client with ${client_id} has a final balance of ${finalBalance}`
                 );
@@ -112,7 +113,6 @@ app.put("/deposit", async function (req, res) {
         );
       }
     );
-    res.send("Completed");
     console.log(req.body);
   });
 });

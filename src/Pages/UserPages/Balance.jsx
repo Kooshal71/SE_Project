@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-
+import { Link } from "react-router-dom";
 const StyledInput = styled.input`
   -webkit-text-security: disc;
   text-security: disc;
@@ -100,6 +100,7 @@ export default function Balance() {
         </StyledForm>
       </div>
       <h1>{`Current Balance : ${balance}`}</h1>
+      <Link to="/user">Menu</Link>
     </div>
   );
 }

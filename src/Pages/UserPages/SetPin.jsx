@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
 
@@ -127,6 +127,7 @@ export default function SetPIN() {
           <button type="submit">Submit</button>
         </StyledForm>
       </div>
+      <Link to="/user">Menu</Link>
     </div>
   );
 }
