@@ -108,7 +108,7 @@ app.put("/beers", (req, res) => {
   });
 });
 */
-
+//! Function to withdraw money from the account
 app.put("/withdraw", async function (req, res) {
   pool.getConnection((err, connection) => {
     if (err) throw err;
@@ -157,6 +157,7 @@ app.put("/withdraw", async function (req, res) {
   });
 });
 
+//! Function to deposit money into the account
 app.put("/deposit", async function (req, res) {
   pool.getConnection((err, connection) => {
     if (err) throw err;
@@ -206,12 +207,33 @@ app.put("/deposit", async function (req, res) {
   });
 });
 
+//! Function to update PIN of the account
+app.put("/changePIN", async function (req, res) {
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log(`Connected to Database with id ${connection.threadId}`);
+    let { oldPIN, newPIN, confirmPIN } = req.body;
+    console.log(confirmPIN);
+    console.log(oldPIN);
+    connection.query(
+      "UPDATE card SET pin = ? WHERE pin = ?",
+      [newPIN, oldPIN],
+      (err, rows) => {
+        connection.release();
+        if (err) throw err;
+        console.log(`PIN Has changed from ${oldPIN} to ${newPIN}`);
+      }
+    );
+    res.send("Completed");
+    console.log(req.body);
+  });
+});
+
+//! Function to fetch all the balances of all the accounts(TESTING)
 app.get("/fetch", (req, res) => {
   pool.getConnection((error, connection) => {
     if (error) throw error;
     console.log("Connected to the database");
-
-    //? query
     connection.query("SELECT * FROM balance_inquiries", (err, rows) => {
       connection.release();
       if (err) throw err;
