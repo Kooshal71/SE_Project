@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
 import { Link } from "react-router-dom";
+import Heading from "../../Components/Heading";
 const StyledInput = styled.input`
   -webkit-text-security: disc;
   text-security: disc;
@@ -11,6 +12,14 @@ const StyledForm = styled.form`
   text-align: center;
 `;
 
+const DivStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background: linear-gradient(#decba4, #3e5151);
+`;
 export default function Deposit() {
   let checkActive = "";
   const [Pin, setPin] = useState("");
@@ -88,10 +97,9 @@ export default function Deposit() {
   };
 
   return (
-    <div>
-      <h1>Deposit Page</h1>
-      <div>
-        {console.log(Pin)}
+    <>
+      <Heading content="Deposit Page" />
+      <DivStyled>
         <StyledForm onSubmit={handleSubmit}>
           <label htmlFor="Pnumber">PIN Number</label>
           <StyledInput
@@ -125,10 +133,10 @@ export default function Deposit() {
           <Keypad handleClick={handleClick} />
           <button type="submit">Submit</button>
         </StyledForm>
-      </div>
+      </DivStyled>
       {/* <h1>{`Current Balance : ${balance}`}</h1> */}
       <h1>{`Final Balance : ${finalBalance}`}</h1>
       <Link to="/user">Menu</Link>
-    </div>
+    </>
   );
 }

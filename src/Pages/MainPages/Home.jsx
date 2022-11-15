@@ -1,5 +1,4 @@
 import React from "react";
-import "../../Styles/Home.css";
 import styled from "styled-components";
 import Button from "../../Components/Button";
 
@@ -21,7 +20,7 @@ const SectionStyled = styled.section`
 export default function Home() {
   return (
     <DivStyled>
-      <h1>Welcome Page</h1>
+      <h1>ATM Simulator</h1>
       <SectionStyled className="main">
         <Button title="User Page" path="/user" />
         <Button title="Operator Page" path="/operator" />

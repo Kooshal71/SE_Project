@@ -89,8 +89,8 @@ export default function Withdraw() {
 
   return (
     <div className="withdrawForm">
-      <h1>Withdraw Page</h1>
       <div>
+        <h1>Withdraw Page</h1>
         {console.log(Pin)}
         <StyledForm onSubmit={handleSubmit}>
           <label htmlFor="Pnumber">PIN Number</label>
