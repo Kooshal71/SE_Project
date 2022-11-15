@@ -54,20 +54,22 @@ app.put("/withdraw", async function (req, res) {
               (err, rows) => {
                 if (err) throw err;
                 let cPin = rows[0].pin;
-                if (cPin !== Pin)
-                  console.log(`CPIN = ${cPin} and PIN = ${Pin}`);
-                connection.query(
-                  "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
-                  [finalBalance, client_id],
-                  (err, rows) => {
-                    connection.release();
-                    if (err) throw err;
-                    res.status(200).json({ finalBalance: finalBalance });
-                    console.log(
-                      `Client with ${client_id} has a final balance of ${finalBalance}`
-                    );
-                  }
-                );
+                if (cPin !== Pin) {
+                  res.status(200).json({ finalBalance: "invalid Pin" });
+                } else {
+                  connection.query(
+                    "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
+                    [finalBalance, client_id],
+                    (err, rows) => {
+                      connection.release();
+                      if (err) throw err;
+                      res.status(200).json({ finalBalance: finalBalance });
+                      console.log(
+                        `Client with ${client_id} has a final balance of ${finalBalance}`
+                      );
+                    }
+                  );
+                }
               }
             );
           }
@@ -83,8 +85,8 @@ app.put("/deposit", async function (req, res) {
   pool.getConnection((err, connection) => {
     if (err) throw err;
     console.log(`Connected to Database with id ${connection.threadId}`);
-    let { pin, cNum, amount } = req.body;
-    console.log(pin);
+    let { Pin, cNum, amount } = req.body;
+    console.log(Pin);
     let client_id = "";
     let finalBalance = 0;
     connection.query(
@@ -109,15 +111,27 @@ app.put("/deposit", async function (req, res) {
             amount = parseInt(amount);
             if (balance < 100000) finalBalance = balance + amount;
             connection.query(
-              "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
-              [finalBalance, client_id],
+              "SELECT pin FROM card WHERE card_no = ?",
+              [cNum],
               (err, rows) => {
-                connection.release();
                 if (err) throw err;
-                res.status(200).json({ finalBalance: finalBalance });
-                console.log(
-                  `Client with ${client_id} has a final balance of ${finalBalance}`
-                );
+                let pin = rows[0].pin;
+                if (pin !== Pin)
+                  res.status(200).json({ finalBalance: "Invalid Pin" });
+                else {
+                  connection.query(
+                    "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
+                    [finalBalance, client_id],
+                    (err, rows) => {
+                      connection.release();
+                      if (err) throw err;
+                      res.status(200).json({ finalBalance: finalBalance });
+                      console.log(
+                        `Client with ${client_id} has a final balance of ${finalBalance}`
+                      );
+                    }
+                  );
+                }
               }
             );
           }
