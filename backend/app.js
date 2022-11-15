@@ -23,8 +23,8 @@ app.put("/withdraw", async function (req, res) {
   pool.getConnection((err, connection) => {
     if (err) throw err;
     console.log(`Connected to Database with id ${connection.threadId}`);
-    const { pin, cNum, amount } = req.body;
-    console.log(pin);
+    let { Pin, cNum, amount } = req.body;
+    console.log(Pin, cNum, amount);
     let client_id = "";
     let finalBalance = 0;
     connection.query(
@@ -47,15 +47,26 @@ app.put("/withdraw", async function (req, res) {
             let balance = rows[0].balance;
             console.log(`Balance is ${balance}`);
             if (balance - amount > 0) finalBalance = balance - amount;
+            //* Need to cross check with the PIN of the card
             connection.query(
-              "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
-              [finalBalance, client_id],
+              "SELECT pin FROM card WHERE card_no = ?",
+              [cNum],
               (err, rows) => {
-                connection.release();
                 if (err) throw err;
-                res.status(200).json({ finalBalance: finalBalance });
-                console.log(
-                  `Client with ${client_id} has a final balance of ${finalBalance}`
+                let cPin = rows[0].pin;
+                if (cPin !== Pin)
+                  console.log(`CPIN = ${cPin} and PIN = ${Pin}`);
+                connection.query(
+                  "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
+                  [finalBalance, client_id],
+                  (err, rows) => {
+                    connection.release();
+                    if (err) throw err;
+                    res.status(200).json({ finalBalance: finalBalance });
+                    console.log(
+                      `Client with ${client_id} has a final balance of ${finalBalance}`
+                    );
+                  }
                 );
               }
             );
