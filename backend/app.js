@@ -197,28 +197,61 @@ app.put("/balance", async function (req, res) {
     console.log(PIN);
     console.log(cNum);
     connection.query(
-      "SELECT client_id FROM client WHERE card_no = ?",
+      "SELECT pin FROM card WHERE card_no = ?",
       [cNum],
       (err, rows) => {
-        if (err) throw err;
-        client_id = rows[0].client_id;
-        connection.query(
-          "SELECT balance FROM balance_inquiries WHERE client_id = ?",
-          [client_id],
-          (err, rows) => {
-            if (err) throw err;
-            connection.release();
-            Balance = rows[0].balance;
-            console.log(Balance);
-            res.status(200).json({ balance: Balance });
-          }
-        );
+        let cPin = rows[0].pin;
+        if (cPin !== PIN) res.status(200).json({ balance: "Invalid Pin" });
+        else {
+          connection.query(
+            "SELECT client_id FROM client WHERE card_no = ?",
+            [cNum],
+            (err, rows) => {
+              if (err) throw err;
+              client_id = rows[0].client_id;
+              connection.query(
+                "SELECT balance FROM balance_inquiries WHERE client_id = ?",
+                [client_id],
+                (err, rows) => {
+                  if (err) throw err;
+                  connection.release();
+                  Balance = rows[0].balance;
+                  console.log(Balance);
+                  res.status(200).json({ balance: Balance });
+                }
+              );
+            }
+          );
+        }
       }
     );
+
     console.log(req.body);
   });
 });
-
+/*
+connection.query(
+              "SELECT pin FROM card WHERE card_no = ?",
+              [cNum],
+              (err, rows) => {
+                if (err) throw err;
+                let pin = rows[0].pin;
+                if (pin !== Pin)
+                  res.status(200).json({ finalBalance: "Invalid Pin" });
+                else {
+                  connection.query(
+                    "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
+                    [finalBalance, client_id],
+                    (err, rows) => {
+                      connection.release();
+                      if (err) throw err;
+                      res.status(200).json({ finalBalance: finalBalance });
+                      console.log(
+                        `Client with ${client_id} has a final balance of ${finalBalance}`
+                      );
+                    }
+                  );
+*/
 app.put("/transfer", async function (req, res) {
   let Balance = 0;
   let client_id1 = "";
@@ -297,6 +330,10 @@ app.get("/fetch", (req, res) => {
       res.send(rows);
     });
   });
+});
+
+app.get("/shutdown", (req, res) => {
+  process.exit();
 });
 
 app.listen(port, () => console.log("listening on port 5000"));
