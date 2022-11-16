@@ -15,7 +15,7 @@ const H1Styled = styled.h1`
     content: "";
     display: block;
     height: 5px;
-    width: 250px;
+    width: 400px;
     margin-bottom: 5px;
   }
   &:after {
@@ -25,7 +25,7 @@ const H1Styled = styled.h1`
     right: 0;
     bottom: 0;
     height: 5px;
-    width: 250px;
+    width: 400px;
     margin-bottom: 0.25em;
   }
 `;

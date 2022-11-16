@@ -18,7 +18,7 @@ const SectionStyled = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin: 40px;
+  margin: 20px;
 `;
 
 export default function Keypad(props) {

@@ -1,13 +1,33 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-import { Link } from "react-router-dom";
-const StyledInput = styled.input`
-  -webkit-text-security: disc;
-  text-security: disc;
-`;
+import Links from "../../Components/Links";
+import MainDiv from "../../Components/MainDiv";
+import SInput from "../../Components/SInput";
+import Heading from "../../Components/Heading";
+import Label from "../../Components/Label";
 const StyledForm = styled.form`
   text-align: center;
+`;
+
+const StyledButton = styled.button`
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 20px 40px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 40px;
+  background-color: green;
 `;
 
 export default function Transfer() {
@@ -81,14 +101,15 @@ export default function Transfer() {
     else if (checker === "amount") checkActive = "amount";
   };
   // useEffect(() => {});
-  return (
-    <div className="withdrawForm">
-      <h1>Balance Page</h1>
-      <div>
+
+  const Content = () => {
+    return (
+      <>
+        <Heading content="Transfer Page" />
         {console.log(cNum1)}
         <StyledForm onSubmit={handleSubmit}>
-          <label htmlFor="cNum1">Sender Card Number</label>
-          <StyledInput
+          <Label htmlFor="cNum1" content="Sender Card Number" />
+          <SInput
             type="password"
             value={cNum1}
             id="cNum1"
@@ -97,8 +118,8 @@ export default function Transfer() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="cNum2">Receiver Card Number</label>
-          <StyledInput
+          <Label htmlFor="cNum2" content="Receiver Card Number" />
+          <SInput
             type="password"
             value={cNum2}
             id="cNum2"
@@ -107,8 +128,8 @@ export default function Transfer() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="amount">Amount</label>
-          <StyledInput
+          <Label htmlFor="amount" content="Amount" />
+          <SInput
             type="text"
             value={amount}
             id="amount"
@@ -117,11 +138,12 @@ export default function Transfer() {
             readOnly={true}
           />
           <Keypad handleClick={handleClick} />
-          <button type="submit">Submit</button>
+          <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
-      </div>
-      {/* <h1>{`Current Balance : ${balance}`}</h1> */}
-      <Link to="/user">Menu</Link>
-    </div>
-  );
+        <Links to="/user" content="Menu" />
+      </>
+    );
+  };
+
+  return <MainDiv content={Content()} />;
 }

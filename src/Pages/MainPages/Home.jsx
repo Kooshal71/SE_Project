@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../../Components/Button";
-
+import MainDiv from "../../Components/MainDiv";
+import Heading from "../../Components/Heading";
 const DivStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  background: linear-gradient(#3e5151, #decba4);
+  height: 70vh;
 `;
 
 const SectionStyled = styled.section`
@@ -17,14 +16,23 @@ const SectionStyled = styled.section`
   margin: 40px;
 `;
 
-export default function Home() {
+const Content = () => {
   return (
-    <DivStyled>
-      <h1>ATM Simulator</h1>
+    <>
+      <Heading content="ATM Simulator" />
       <SectionStyled className="main">
         <Button title="User Page" path="/user" />
         <Button title="Operator Page" path="/operator" />
       </SectionStyled>
-    </DivStyled>
+    </>
+  );
+};
+
+export default function Home() {
+  return (
+    <>
+      <MainDiv content={Content()} />
+      <DivStyled></DivStyled>
+    </>
   );
 }

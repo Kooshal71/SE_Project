@@ -80,7 +80,7 @@ app.put("/withdraw", async function (req, res) {
   });
 });
 
-//! Function to deposit money into the account
+//! Function to transfer money into the account
 app.put("/deposit", async function (req, res) {
   pool.getConnection((err, connection) => {
     if (err) throw err;

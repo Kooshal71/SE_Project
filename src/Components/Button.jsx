@@ -10,18 +10,18 @@ const ButtonStyled = styled.button`
   color: #000;
   cursor: pointer;
   border: 3px solid;
-  padding: 20px 40px;
+  padding: 25px 40px;
   box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
     5px 5px 0px 0px;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin: 40px;
+  margin: 30px;
 `;
 ButtonStyled.defaultProps = {
   theme: {
-    main: "#66FCF1",
+    main: "#2636E3",
   },
 };
 export default function Button(props) {

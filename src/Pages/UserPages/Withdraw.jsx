@@ -1,15 +1,34 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Links from "../../Components/Links";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
+import MainDiv from "../../Components/MainDiv";
+import SInput from "../../Components/SInput";
+import Heading from "../../Components/Heading";
 
-const StyledInput = styled.input`
-  -webkit-text-security: disc;
-  text-security: disc;
-`;
 const StyledForm = styled.form`
   text-align: center;
+`;
+
+const StyledButton = styled.button`
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 20px 40px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 40px;
+  background-color: green;
 `;
 
 export default function Withdraw() {
@@ -87,14 +106,14 @@ export default function Withdraw() {
     else if (checker === "amount") checkActive = "amount";
   };
 
-  return (
-    <div className="withdrawForm">
-      <div>
-        <h1>Withdraw Page</h1>
+  const Content = () => {
+    return (
+      <>
+        <Heading content="Withdraw Page" />
         {console.log(Pin)}
         <StyledForm onSubmit={handleSubmit}>
           <label htmlFor="Pnumber">PIN Number</label>
-          <StyledInput
+          <SInput
             type="password"
             value={Pin}
             id="PNumber"
@@ -104,7 +123,7 @@ export default function Withdraw() {
           />
           <br />
           <label htmlFor="CNumber">Card Number</label>
-          <StyledInput
+          <SInput
             type="password"
             value={cNum}
             id="CNumber"
@@ -114,7 +133,7 @@ export default function Withdraw() {
           />
           <br />
           <label htmlFor="Amount">Amount</label>
-          <StyledInput
+          <SInput
             type="text"
             value={amount}
             id="amount"
@@ -123,11 +142,13 @@ export default function Withdraw() {
             readOnly={true}
           />
           <Keypad handleClick={handleClick} />
-          <button type="submit">Submit</button>
+          <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
-      </div>
-      <h1>{`Final Balance : ${finalBalance}`}</h1>
-      <Link to="/user">Menu</Link>
-    </div>
-  );
+        <h1>{`Final Balance : ${finalBalance}`}</h1>
+        <Links to="/user" content="Menu" />
+      </>
+    );
+  };
+
+  return <MainDiv content={Content()} />;
 }

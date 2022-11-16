@@ -2,24 +2,34 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-import { Link } from "react-router-dom";
 import Heading from "../../Components/Heading";
-const StyledInput = styled.input`
-  -webkit-text-security: disc;
-  text-security: disc;
-`;
+import SInput from "../../Components/SInput";
+import MainDiv from "../../Components/MainDiv";
+import Label from "../../Components/Label";
+import Links from "../../Components/Links";
 const StyledForm = styled.form`
   text-align: center;
 `;
-
-const DivStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  background: linear-gradient(#decba4, #3e5151);
+const StyledButton = styled.button`
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 20px 40px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 40px;
+  background-color: green;
 `;
+
 export default function Deposit() {
   let checkActive = "";
   const [Pin, setPin] = useState("");
@@ -96,13 +106,14 @@ export default function Deposit() {
     else if (checker === "amount") checkActive = "amount";
   };
 
-  return (
-    <>
-      <Heading content="Deposit Page" />
-      <DivStyled>
+  const Content = () => {
+    return (
+      <>
+        <Heading content="Deposit Page" />
         <StyledForm onSubmit={handleSubmit}>
-          <label htmlFor="Pnumber">PIN Number</label>
-          <StyledInput
+          <Label htmlFor="Pnumber" content="PIN Number" />
+          <br />
+          <SInput
             type="password"
             value={Pin}
             id="PNumber"
@@ -111,8 +122,9 @@ export default function Deposit() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="CNumber">Card Number</label>
-          <StyledInput
+          <Label htmlFor="CNumber" content="Card Number" />
+          <br />
+          <SInput
             type="password"
             value={cNum}
             id="CNumber"
@@ -121,8 +133,9 @@ export default function Deposit() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="Amount">Amount</label>
-          <StyledInput
+          <Label htmlFor="Amount" content="Amount" />
+          <br />
+          <SInput
             type="text"
             value={amount}
             id="amount"
@@ -131,12 +144,13 @@ export default function Deposit() {
             readOnly={true}
           />
           <Keypad handleClick={handleClick} />
-          <button type="submit">Submit</button>
+          <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
-      </DivStyled>
-      {/* <h1>{`Current Balance : ${balance}`}</h1> */}
-      <h1>{`Final Balance : ${finalBalance}`}</h1>
-      <Link to="/user">Menu</Link>
-    </>
-  );
+        <h1>{`Final Balance : ${finalBalance}`}</h1>
+        <Links to="/user" content="Menu" />
+      </>
+    );
+  };
+
+  return <MainDiv content={Content()} />;
 }

@@ -1,13 +1,33 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-import { Link } from "react-router-dom";
-const StyledInput = styled.input`
-  -webkit-text-security: disc;
-  text-security: disc;
-`;
+import MainDiv from "../../Components/MainDiv";
+import SInput from "../../Components/SInput";
+import Heading from "../../Components/Heading";
+import Label from "../../Components/Label";
+import Links from "../../Components/Links";
 const StyledForm = styled.form`
   text-align: center;
+`;
+
+const StyledButton = styled.button`
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 20px 40px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 40px;
+  background-color: green;
 `;
 
 export default function Balance() {
@@ -68,15 +88,14 @@ export default function Balance() {
     if (checker === "cNum") checkActive = "cNum";
     else if (checker === "PIN") checkActive = "PIN";
   };
-  // useEffect(() => {});
-  return (
-    <div className="withdrawForm">
-      <h1>Balance Page</h1>
-      <div>
-        {console.log(cNum)}
+
+  const Content = () => {
+    return (
+      <>
+        <Heading content="Balance Page" />
         <StyledForm onSubmit={handleSubmit}>
-          <label htmlFor="cNum">Card Number</label>
-          <StyledInput
+          <Label htmlFor="cNum" content="Card Number" />
+          <SInput
             type="password"
             value={cNum}
             id="cNum"
@@ -85,8 +104,8 @@ export default function Balance() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="NPIN">New PIN Number</label>
-          <StyledInput
+          <Label htmlFor="PIN" content="PIN Number" />
+          <SInput
             type="password"
             value={PIN}
             id="PIN"
@@ -96,11 +115,14 @@ export default function Balance() {
           />
           <br />
           <Keypad handleClick={handleClick} />
-          <button type="submit">Submit</button>
+          <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
-      </div>
-      <h1>{`Current Balance : ${balance}`}</h1>
-      <Link to="/user">Menu</Link>
-    </div>
-  );
+        <h1>{`Current Balance : ${balance}`}</h1>
+        <Links to="/user" content="Menu" />
+      </>
+    );
+  };
+
+  // useEffect(() => {});
+  return <MainDiv content={Content()} />;
 }

@@ -2,13 +2,33 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Keypad from "../../Components/Keypad";
-import { Link } from "react-router-dom";
-const StyledInput = styled.input`
-  -webkit-text-security: disc;
-  text-security: disc;
-`;
+import MainDiv from "../../Components/MainDiv";
+import SInput from "../../Components/SInput";
+import Label from "../../Components/Label";
+import Heading from "../../Components/Heading";
+import Links from "../../Components/Links";
 const StyledForm = styled.form`
   text-align: center;
+`;
+
+const StyledButton = styled.button`
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 20px 40px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 40px;
+  background-color: green;
 `;
 
 export default function ChangePin() {
@@ -88,14 +108,14 @@ export default function ChangePin() {
     else if (checker === "CPIN") checkActive = "confirmPIN";
   };
 
-  return (
-    <div className="withdrawForm">
-      <h1>Change PIN Page</h1>
-      <div>
+  const Content = () => {
+    return (
+      <>
+        <Heading content="Change PIN Page">Change PIN Page</Heading>
         {console.log(oldPIN)}
         <StyledForm onSubmit={handleSubmit}>
-          <label htmlFor="OPIN">Old PIN Number</label>
-          <StyledInput
+          <Label htmlFor="OPIN" content="Old PIN Number" />
+          <SInput
             type="password"
             value={oldPIN}
             id="OPIN"
@@ -104,8 +124,8 @@ export default function ChangePin() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="NPIN">New PIN Number</label>
-          <StyledInput
+          <Label htmlFor="NPIN" content="New PIN Number" />
+          <SInput
             type="password"
             value={newPIN}
             id="NPIN"
@@ -114,8 +134,8 @@ export default function ChangePin() {
             readOnly={true}
           />
           <br />
-          <label htmlFor="CPIN">Confirm PIN Number</label>
-          <StyledInput
+          <Label htmlFor="CPIN" content="Confirm PIN Number" />
+          <SInput
             type="text"
             value={confirmPIN}
             id="CPIN"
@@ -124,10 +144,12 @@ export default function ChangePin() {
             readOnly={true}
           />
           <Keypad handleClick={handleClick} />
-          <button type="submit">Submit</button>
+          <StyledButton type="submit">Submit</StyledButton>
         </StyledForm>
-      </div>
-      <Link to="/user">Menu</Link>
-    </div>
-  );
+        <Links to="/user" content="Menu" />
+      </>
+    );
+  };
+
+  return <MainDiv content={Content()} />;
 }
