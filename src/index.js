@@ -11,6 +11,7 @@ import Transfer from "./Pages/UserPages/Transfer";
 import Balance from "./Pages/UserPages/Balance";
 import SetPin from "./Pages/UserPages/SetPin";
 import ChangePin from "./Pages/UserPages/ChangePin";
+import Shutdown from "./Pages/OperatorPages/Shutdown";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/user/changePIN",
     element: <ChangePin />,
+  },
+  {
+    path: "/shutdown",
+    element: <Shutdown />,
   },
 ]);
 

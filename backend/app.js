@@ -333,6 +333,7 @@ app.get("/fetch", (req, res) => {
 });
 
 app.get("/shutdown", (req, res) => {
+  res.json({ reply: "success" });
   process.exit();
 });
 
