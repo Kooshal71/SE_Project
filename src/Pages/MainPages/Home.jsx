@@ -23,6 +23,7 @@ const Content = () => {
       <SectionStyled className="main">
         <Button title="User Page" path="/user" />
         <Button title="Operator Page" path="/operator" />
+        <Button title="DBMS Project" path="/dbms" />
       </SectionStyled>
     </>
   );

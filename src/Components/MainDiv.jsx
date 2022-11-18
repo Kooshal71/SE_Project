@@ -7,7 +7,7 @@ const DivStyled = styled.div`
   flex-direction: column;
   text-align: center;
   background: linear-gradient(#decba4, #3e5151);
-  height: 100%;
+  height: 100vh;
 `;
 
 export default function MainDiv(props) {

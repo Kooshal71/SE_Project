@@ -11,7 +11,12 @@ import Transfer from "./Pages/UserPages/Transfer";
 import Balance from "./Pages/UserPages/Balance";
 import SetPin from "./Pages/UserPages/SetPin";
 import ChangePin from "./Pages/UserPages/ChangePin";
+import Dbms from "./Pages/MainPages/Dbms";
 import Shutdown from "./Pages/OperatorPages/Shutdown";
+import Card from "./Pages/DatabasePages/Card";
+import Client from "./Pages/DatabasePages/Client";
+import Transaction from "./Pages/DatabasePages/Transaction";
+import BalanceDBMS from "./Pages/DatabasePages/BalanceDBMS";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +58,26 @@ const router = createBrowserRouter([
   {
     path: "/shutdown",
     element: <Shutdown />,
+  },
+  {
+    path: "/dbms",
+    element: <Dbms />,
+  },
+  {
+    path: "/dbms/card",
+    element: <Card />,
+  },
+  {
+    path: "/dbms/client",
+    element: <Client />,
+  },
+  {
+    path: "/dbms/transaction",
+    element: <Transaction />,
+  },
+  {
+    path: "dbms/balance",
+    element: <BalanceDBMS />,
   },
 ]);
 
