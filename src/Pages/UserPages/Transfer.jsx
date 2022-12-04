@@ -6,6 +6,7 @@ import MainDiv from "../../Components/MainDiv";
 import SInput from "../../Components/SInput";
 import Heading from "../../Components/Heading";
 import Label from "../../Components/Label";
+import { useNavigate } from "react-router-dom";
 const StyledForm = styled.form`
   text-align: center;
 `;
@@ -31,6 +32,7 @@ const StyledButton = styled.button`
 `;
 
 export default function Transfer() {
+  let navigate = useNavigate();
   let checkActive = "";
   const [cNum1, setcNum1] = useState("");
   const [cNum2, setcNum2] = useState("");
@@ -48,6 +50,7 @@ export default function Transfer() {
     const res = await response.json();
     console.log(res);
     console.log("You have submitted the form");
+    navigate("/user");
   };
 
   const handleClick = (e) => {

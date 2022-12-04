@@ -15,7 +15,7 @@ const pool = mysql.createPool({
   host: "127.0.0.1",
   user: "root",
   password: "",
-  database: "SE_Project",
+  database: "atm",
 });
 
 //! Function to withdraw money from the account
@@ -28,7 +28,7 @@ app.put("/withdraw", async function (req, res) {
     let client_id = "";
     let finalBalance = 0;
     connection.query(
-      `SELECT client_id FROM client WHERE card_no = ?`,
+      `SELECT client_id FROM card WHERE card_no = ?`,
       [cNum],
       (err, rows) => {
         //connection.release();
@@ -54,6 +54,8 @@ app.put("/withdraw", async function (req, res) {
               (err, rows) => {
                 if (err) throw err;
                 let cPin = rows[0].pin;
+                // cPin = parseInt(cPin);
+                console.log(cPin, Pin);
                 if (cPin !== Pin) {
                   res.status(200).json({ finalBalance: "invalid Pin" });
                 } else {
@@ -90,7 +92,7 @@ app.put("/deposit", async function (req, res) {
     let client_id = "";
     let finalBalance = 0;
     connection.query(
-      `SELECT client_id FROM client WHERE card_no = ?`,
+      `SELECT client_id FROM card WHERE card_no = ?`,
       [cNum],
       (err, rows) => {
         //connection.release();
@@ -204,7 +206,7 @@ app.put("/balance", async function (req, res) {
         if (cPin !== PIN) res.status(200).json({ balance: "Invalid Pin" });
         else {
           connection.query(
-            "SELECT client_id FROM client WHERE card_no = ?",
+            "SELECT client_id FROM card WHERE card_no = ?",
             [cNum],
             (err, rows) => {
               if (err) throw err;
@@ -264,11 +266,12 @@ app.put("/transfer", async function (req, res) {
     console.log(amount);
     console.log(cNum1);
     connection.query(
-      "SELECT client_id FROM client WHERE card_no = ?",
+      "SELECT client_id FROM card WHERE card_no = ?",
       [cNum1],
       (err, rows) => {
         if (err) throw err;
         client_id1 = rows[0].client_id;
+        console.log(client_id1);
         connection.query(
           "SELECT balance FROM balance_inquiries WHERE client_id = ?",
           [client_id1],
@@ -277,17 +280,19 @@ app.put("/transfer", async function (req, res) {
             Balance = rows[0].balance;
             Balance = parseInt(Balance);
             let finalBalance = Balance - amount;
+            console.log(finalBalance);
             connection.query(
               "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
               [finalBalance, client_id1],
               (err, rows) => {
                 if (err) throw err;
                 connection.query(
-                  "SELECT client_id FROM client WHERE card_no = ?",
+                  "SELECT client_id FROM card WHERE card_no = ?",
                   [cNum2],
                   (err, rows) => {
                     if (err) throw err;
                     client_id2 = rows[0].client_id;
+                    console.log(client_id2);
                     connection.query(
                       "SELECT balance FROM balance_inquiries WHERE client_id = ?",
                       [client_id2],
@@ -296,12 +301,14 @@ app.put("/transfer", async function (req, res) {
                         Balance = rows[0].balance;
                         Balance = parseInt(Balance);
                         finalBalance = Balance + amount;
+                        console.log(finalBalance);
                         connection.query(
                           "UPDATE balance_inquiries SET balance = ? WHERE client_id = ?",
                           [finalBalance, client_id2],
                           (err, rows) => {
                             connection.release();
                             if (err) throw err;
+                            console.log("Done");
                             res.status(200).json({ success: true });
                           }
                         );
